@@ -31,7 +31,7 @@ import { Component, OnInit } from '@angular/core';
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading">
-            <h1>Regalami un libro <i class="fa fa-heart"></i></h1>
+            <h1 class="title">Regalami un libro <i class="fa fa-heart"></i></h1>
             <span class="subheading">L'app dei libri che cercavi</span>
           </div>
         </div>
@@ -56,7 +56,7 @@ import { Component, OnInit } from '@angular/core';
       font-family: 'Amatic SC', cursive;
     }
     .title {
-      font-size: 7.2rem !important;
+      font-size: 4.2rem !important;
       font-family: 'Amatic SC', cursive;
     }
     #mainNav .navbar-nav>li.nav-item>a {
