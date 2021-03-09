@@ -1,0 +1,45 @@
+<!-- Main Content -->
+<div class="container">
+    <div class="row align-items-start">
+        <div class="col">
+            <div *ngIf="err" class="alert alert-danger">{{err.statusText}}</div>
+            <div class="row">
+                <ul class="list-group">
+                    <li class="list-group-item" *ngFor="let book of books">
+                        {{book.id}} - {{book.title}} - {{book.author}}
+                        <div class="pull-right">
+                            € {{book.price | number:'1.2-2'}} <i class="fa fa-trash" (click)="delete(book)"
+                                aria-hidden="true"></i>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col">
+            <form #f="ngForm" (ngSubmit)="AddBook(f)">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input [ngModel] type="text" class="form-control" name="title">
+                </div>
+                <div class="mb-3">
+                    <label for="author" class="form-label">Autore</label>
+                    <input [ngModel] type="text" class="form-control" name="author">
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">Price</label>
+                    <input [ngModel] type="text" class="form-control" name="price">
+                </div>
+                <div class="mb-3">
+                    <label for="isbn" class="form-label">ISBN</label>
+                    <input [ngModel] type="text" class="form-control" name="isbn">
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Descrizione</label><br>
+                    <textarea [ngModel] name="description" cols="80" rows="4"></textarea>
+                </div>
+                <button type="submit" class="btn btn-outline-success">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+<hr>

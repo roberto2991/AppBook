@@ -2,35 +2,15 @@ import { Book } from './../../model/book';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { error } from '@angular/compiler/src/util';
+import { FormsModule, NgForm } from '@angular/forms';
+
 
 const dbUrl = "http://localhost:3000/books";
 const dbUrlBad = "http://localhost:3000/bookssss";
 
 @Component({
   selector: 'app-book',
-  template: `
-
-  <!-- Main Content -->
-  <div class="container">
-  <div *ngIf="err" class="alert alert-danger">{{err.statusText}}</div>
-    <div class="row">
-    <ul class="list-group">
-        <li class="list-group-item" *ngFor="let book of books">
-        {{book.id}} - {{book.title}} - {{book.author}}
-            <div class="pull-right">
-            € {{book.price | number:'1.2-2'}} <i class="fa fa-trash" (click)="delete(book)" aria-hidden="true"></i>
-            </div>
-        </li>
-    </ul>
-    
-    </div>
-  </div>
-
-  <hr>
-
-  
-
-  `,
+  templateUrl: './book.component.html',
   styles: [
   ]
 })
@@ -40,6 +20,13 @@ export class BookComponent implements OnInit {
   err: any;
 
   constructor(private http: HttpClient) { }
+
+  AddBook(form: NgForm) {
+    console.log(form);
+    this.http.post<Book>(`${dbUrl}`, form.value).subscribe(data => {
+      this.books.push(data);
+    });
+  }
 
   getAll() {
     this.http.get<Book[]>(`${dbUrl}`).subscribe(data => {
