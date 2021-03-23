@@ -5,10 +5,10 @@
             <div *ngIf="err" class="alert alert-danger">{{err.statusText}}</div>
             <div class="row">
                 <ul class="list-group">
-                    <li class="list-group-item" *ngFor="let book of books">
+                    <li class="list-group-item" [ngClass]="{active: book.id === active?.id}" *ngFor="let book of books" (click)="setActive(book)">
                         {{book.id}} - {{book.title}} - {{book.author}}
                         <div class="pull-right">
-                            € {{book.price | number:'1.2-2'}} <i class="fa fa-trash" (click)="delete(book)"
+                            € {{book.price | number:'1.2-2'}} <i class="fa fa-trash" (click)="delete($event, book)"
                                 aria-hidden="true"></i>
                         </div>
                     </li>
@@ -16,28 +16,29 @@
             </div>
         </div>
         <div class="col">
-            <form #f="ngForm" (ngSubmit)="AddBook(f)">
+            <form #f="ngForm" (ngSubmit)="save(f)">
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
-                    <input [ngModel] type="text" class="form-control" name="title">
+                    <input [ngModel]="active?.title" type="text" class="form-control" name="title">
                 </div>
                 <div class="mb-3">
                     <label for="author" class="form-label">Autore</label>
-                    <input [ngModel] type="text" class="form-control" name="author">
+                    <input [ngModel]="active?.author" type="text" class="form-control" name="author">
                 </div>
                 <div class="mb-3">
                     <label for="price" class="form-label">Price</label>
-                    <input [ngModel] type="text" class="form-control" name="price">
+                    <input [ngModel]="active?.price" type="text" class="form-control" name="price">
                 </div>
                 <div class="mb-3">
                     <label for="isbn" class="form-label">ISBN</label>
-                    <input [ngModel] type="text" class="form-control" name="isbn">
+                    <input [ngModel]="active?.isbn" type="text" class="form-control" name="isbn">
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Descrizione</label><br>
-                    <textarea [ngModel] name="description" cols="80" rows="4"></textarea>
+                    <textarea [ngModel]="active?.description" name="description" cols="80" rows="4"></textarea>
                 </div>
-                <button type="submit" class="btn btn-outline-success">Submit</button>
+                <button type="submit" class="btn btn-outline-success">{{active ? 'EDIT' : 'ADD'}}</button>
+                <button type="button" class="btn btn-outline-warning" (click)="reset(f)">RESET</button>
             </form>
         </div>
     </div>
