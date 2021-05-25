@@ -5,12 +5,15 @@
             <div *ngIf="err" class="alert alert-danger">{{err.statusText}}</div>
             <div class="row">
                 <ul class="list-group">
-                    <li class="list-group-item" [ngClass]="{active: book.id === active?.id}" *ngFor="let book of books" (click)="setActive(book)">
+                    <li class="list-group-item" [ngClass]="{active: book.id === active?.id}" *ngFor="let book of books"
+                        (click)="setActive(book)">
+                        <img [src]="book.img ? book.img : '../../assets/img/kisspng.jpg'" class="img-thumnail mr-2" width="40">
                         {{book.id}} - {{book.title}} - {{book.author}}
                         <div class="pull-right">
                             € {{book.price | number:'1.2-2'}} <i class="fa fa-trash" (click)="delete($event, book)"
                                 aria-hidden="true"></i>
                         </div>
+                        
                     </li>
                 </ul>
             </div>
@@ -37,6 +40,14 @@
                     <label for="description" class="form-label">Descrizione</label><br>
                     <textarea [ngModel]="active?.description" name="description" cols="80" rows="4"></textarea>
                 </div>
+                <div class="form-group">
+                    <input style="display: none;" #selectedFile type="file" class="form-control" name="img" (change)="readUrl($event)">
+                </div>
+                <div class="mb-3">
+                    <img *ngIf="this.imgSrc" [src]="this.imgSrc" height="170" alt="" />
+                    <button type="button" class="btn btn-primary" (click)="selectedFile.click()">Aggiungi immagine</button>
+                </div>
+                <input *ngIf="this.imgSrc" [(ngModel)]="this.imgSrc" type="hidden" name="img">
                 <button type="submit" class="btn btn-outline-success">{{active ? 'EDIT' : 'ADD'}}</button>
                 <button type="button" class="btn btn-outline-warning" (click)="reset(f)">RESET</button>
             </form>

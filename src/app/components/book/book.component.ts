@@ -19,8 +19,22 @@ export class BookComponent implements OnInit {
   books: Book[];
   err: any;
   active: Book;
+  imgSrc: string;
 
   constructor(private http: HttpClient) { }
+
+  readUrl(e: any) {
+    const reader = new FileReader();
+    console.log(e.target.files);
+    //if (e.target.files && e.target.files.lenght) {
+    const [file] = e.target.files;
+    reader.readAsDataURL(file);
+
+    reader.onload = () => {
+      this.imgSrc = reader.result as string;
+    }
+    //}
+  }
 
   save(f: NgForm) {
     if (this.active) {
@@ -55,7 +69,7 @@ export class BookComponent implements OnInit {
   }
 
   delete(event: Event, book: Book) {
-    
+
     event.stopPropagation();
     this.http.delete<Book[]>(`${dbUrl}/${book.id}`).subscribe(next => {
       const idx = this.books.findIndex(b => b.id === book.id);
@@ -67,6 +81,7 @@ export class BookComponent implements OnInit {
 
   reset(f: NgForm) {
     this.active = null;
+    this.imgSrc = null;
     f.reset();
   }
 
