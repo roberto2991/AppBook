@@ -30,9 +30,19 @@ export class BookComponent implements OnInit {
     const [file] = e.target.files;
     reader.readAsDataURL(file);
 
-    reader.onload = () => {
-      this.imgSrc = reader.result as string;
+    if(this.active)
+    {
+      reader.onload = () => {
+        this.active.img = reader.result as string;
+      }
+    }else
+    {
+      reader.onload = () => {
+        this.imgSrc = reader.result as string;
+      }
     }
+
+    
     //}
   }
 
@@ -49,6 +59,7 @@ export class BookComponent implements OnInit {
       const idx = this.books.findIndex(b => b.id === this.active.id);
       this.books[idx] = data;
       console.log('edit element');
+      this.reset(f);
     });
   }
 
@@ -56,6 +67,7 @@ export class BookComponent implements OnInit {
     console.log(form);
     this.http.post<Book>(`${dbUrl}`, form.value).subscribe(data => {
       this.books.push(data);
+      this.reset(form);
     });
   }
 

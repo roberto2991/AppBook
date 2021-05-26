@@ -44,9 +44,11 @@
                     <input style="display: none;" #selectedFile type="file" class="form-control" name="img" (change)="readUrl($event)">
                 </div>
                 <div class="mb-3">
-                    <img *ngIf="this.imgSrc" [src]="this.imgSrc" height="170" alt="" />
+                    <img *ngIf="active" [src]="active?.img" height="170" />
+                    <img *ngIf="this.imgSrc" [src]="this.imgSrc" height="170" />
                     <button type="button" class="btn btn-primary" (click)="selectedFile.click()">Aggiungi immagine</button>
                 </div>
+                <input *ngIf="active" [(ngModel)]="active.img" type="hidden" name="img">
                 <input *ngIf="this.imgSrc" [(ngModel)]="this.imgSrc" type="hidden" name="img">
                 <button type="submit" class="btn btn-outline-success">{{active ? 'EDIT' : 'ADD'}}</button>
                 <button type="button" class="btn btn-outline-warning" (click)="reset(f)">RESET</button>
