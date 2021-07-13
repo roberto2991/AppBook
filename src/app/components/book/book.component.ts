@@ -19,57 +19,10 @@ export class BookComponent implements OnInit {
   books: Book[];
   err: any;
   active: Book;
-  imgSrc: string;
 
   constructor(private http: HttpClient) { }
 
-  readUrl(e: any) {
-    const reader = new FileReader();
-    console.log(e.target.files);
-    //if (e.target.files && e.target.files.lenght) {
-    const [file] = e.target.files;
-    reader.readAsDataURL(file);
-
-    if(this.active)
-    {
-      reader.onload = () => {
-        this.active.img = reader.result as string;
-      }
-    }else
-    {
-      reader.onload = () => {
-        this.imgSrc = reader.result as string;
-      }
-    }
-
-    
-    //}
-  }
-
-  save(f: NgForm) {
-    if (this.active) {
-      this.edit(f)
-    } else {
-      this.AddBook(f);
-    }
-  }
-
-  edit(f: NgForm) {
-    this.http.patch<Book>(`${dbUrl}/${this.active.id}`, f.value).subscribe(data => {
-      const idx = this.books.findIndex(b => b.id === this.active.id);
-      this.books[idx] = data;
-      console.log('edit element');
-      this.reset(f);
-    });
-  }
-
-  AddBook(form: NgForm) {
-    console.log(form);
-    this.http.post<Book>(`${dbUrl}`, form.value).subscribe(data => {
-      this.books.push(data);
-      this.reset(form);
-    });
-  }
+  
 
   getAll() {
     this.http.get<Book[]>(`${dbUrl}`).subscribe(data => {
@@ -91,11 +44,7 @@ export class BookComponent implements OnInit {
     );
   }
 
-  reset(f: NgForm) {
-    this.active = null;
-    this.imgSrc = null;
-    f.reset();
-  }
+
 
   setActive(book: Book) {
     this.active = book;
