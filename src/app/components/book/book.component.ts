@@ -1,6 +1,7 @@
 import { Book } from './../../model/book';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { BookService } from 'src/app/service/book.service';
 import { error } from '@angular/compiler/src/util';
 import { FormsModule, NgForm, NgModel } from '@angular/forms';
 
@@ -20,12 +21,12 @@ export class BookComponent implements OnInit {
   err: any;
   active: Book;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private bookService: BookService) { }
 
   
 
   getAll() {
-    this.http.get<Book[]>(`${dbUrl}`).subscribe(data => {
+    this.bookService.getAll().subscribe(data => {
       console.log(data)
       this.books = data;
     },
@@ -36,7 +37,7 @@ export class BookComponent implements OnInit {
   delete(event: Event, book: Book) {
 
     event.stopPropagation();
-    this.http.delete<Book[]>(`${dbUrl}/${book.id}`).subscribe(next => {
+    this.bookService.Delete(book).subscribe(next => {
       const idx = this.books.findIndex(b => b.id === book.id);
       this.books.splice(idx, 1);
     },

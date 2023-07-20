@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { BookService } from 'src/app/service/book.service';
 import { Book } from 'src/app/model/book';
 
 const dbUrl = "http://localhost:3000/books";
@@ -52,7 +53,9 @@ export class FormComponent implements OnInit {
   @Input() active: Book;
   imgSrc: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private bookService: BookService) {
+
+   }
 
   ngOnInit(): void {
   }
@@ -66,7 +69,7 @@ export class FormComponent implements OnInit {
   }
 
   edit(f: NgForm) {
-    this.http.patch<Book>(`${dbUrl}/${this.active.id}`, f.value).subscribe(data => {
+    this.bookService.Edit(f, this.active).subscribe(data => {
       const idx = this.books.findIndex(b => b.id === this.active.id);
       this.books[idx] = data;
       console.log('edit element');
@@ -76,7 +79,7 @@ export class FormComponent implements OnInit {
 
   AddBook(form: NgForm) {
     console.log(form);
-    this.http.post<Book>(`${dbUrl}`, form.value).subscribe(data => {
+    this.bookService.AddBook(form).subscribe(data => {
       this.books.push(data);
       this.reset(form);
     });
