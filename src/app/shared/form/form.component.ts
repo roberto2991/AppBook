@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { BookService } from 'src/app/service/book.service';
@@ -12,7 +12,7 @@ const dbUrl = "http://localhost:3000/books";
   <form #f="ngForm" (ngSubmit)="save(f)">
   <div class="mb-3">
       <label for="title" class="form-label">Title</label>
-      <input [ngModel]="active?.title" type="text" class="form-control" name="title">
+      <input [ngModel]="active?.title" type="text" class="form-control" name="title" required>
   </div>
   <div class="mb-3">
       <label for="author" class="form-label">Autore</label>
@@ -20,7 +20,7 @@ const dbUrl = "http://localhost:3000/books";
   </div>
   <div class="mb-3">
       <label for="price" class="form-label">Price</label>
-      <input [ngModel]="active?.price" type="text" class="form-control" name="price">
+      <input [ngModel]="active?.price" type="text" class="form-control" name="price" required>
   </div>
   <div class="mb-3">
       <label for="isbn" class="form-label">ISBN</label>
@@ -40,7 +40,7 @@ const dbUrl = "http://localhost:3000/books";
   </div>
   <input *ngIf="active" [(ngModel)]="active.img" type="hidden" name="img">
   <input *ngIf="this.imgSrc" [(ngModel)]="this.imgSrc" type="hidden" name="img">
-  <button type="submit" class="btn btn-outline-success">{{active ? 'EDIT' : 'ADD'}}</button>
+  <button type="submit" class="btn btn-outline-success" [disabled]="f.invalid">{{active ? 'EDIT' : 'ADD'}}</button>
   <button type="button" class="btn btn-outline-warning" (click)="reset(f)">RESET</button>
 </form>
   `,
@@ -51,6 +51,7 @@ export class FormComponent implements OnInit {
 
   @Input() books: Book[];
   @Input() active: Book;
+  @Output() resetClick: EventEmitter<Book> = new EventEmitter<Book>();
   imgSrc: string;
 
   constructor(private http: HttpClient, private bookService: BookService) {
@@ -88,6 +89,7 @@ export class FormComponent implements OnInit {
   reset(f: NgForm) {
     this.active = null;
     this.imgSrc = null;
+    this.resetClick.emit();
     f.reset();
   }
 

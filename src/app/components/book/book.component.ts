@@ -6,9 +6,6 @@ import { error } from '@angular/compiler/src/util';
 import { FormsModule, NgForm, NgModel } from '@angular/forms';
 
 
-const dbUrl = "http://localhost:3000/books";
-const dbUrlBad = "http://localhost:3000/bookssss";
-
 @Component({
   selector: 'app-book',
   templateUrl: './book.component.html',
@@ -49,6 +46,10 @@ export class BookComponent implements OnInit {
 
   setActive(book: Book) {
     this.active = book;
+  }
+
+  reset() {
+    this.active = null;
   }
 
   ngOnInit(): void {
