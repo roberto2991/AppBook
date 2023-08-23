@@ -10,6 +10,8 @@ import { FooterComponent } from './shared/footer/footer.component';
 import {HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { FormComponent } from './shared/form/form.component';
+import { BookDetailComponent } from './features/book-detail/book-detail.component';
+import { SpinnerComponent } from './features/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { FormComponent } from './shared/form/form.component';
     BookComponent,
     HeaderComponent,
     FooterComponent,
-    FormComponent
+    FormComponent,
+    BookDetailComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,

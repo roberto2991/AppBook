@@ -3,6 +3,7 @@
     <div class="row align-items-start">
         <div class="col">
             <div *ngIf="err" class="alert alert-danger">{{err.statusText}}</div>
+            <app-spinner *ngIf="!books"></app-spinner>
             <div class="row">
                 <ul class="list-group">
                     <li class="list-group-item" [ngClass]="{active: book.id === active?.id}" *ngFor="let book of books"
@@ -10,8 +11,9 @@
                         <img [src]="book.img ? book.img : '../../assets/img/kisspng.jpg'" class="img-thumnail mr-2" width="40">
                         {{book.id}} - {{book.title}} - {{book.author}}
                         <div class="pull-right">
-                            € {{book.price | number:'1.2-2'}} <i class="fa fa-trash" (click)="delete($event, book)"
-                                aria-hidden="true"></i>
+                            € {{book.price | number:'1.2-2'}} 
+                            <i class="fa fa-info-circle ml-2" [routerLink]="['/book', book.id]" aria-hidden="true"></i>
+                            <i class="fa fa-trash ml-2" (click)="delete($event, book)" aria-hidden="true"></i>
                         </div>
                         
                     </li>

@@ -17,6 +17,9 @@ export class BookService {
     return this.http.get<Book[]>(`${dbUrl}`);
   }
 
+  getById(id: number) : Observable <Book>{
+    return this.http.get<Book>(`${dbUrl}/${id}`);
+  }
 
   AddBook(formS: NgForm) : Observable <Book>{
     console.log(formS);
