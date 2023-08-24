@@ -10,13 +10,39 @@ import { FormsModule, NgForm, NgModel } from '@angular/forms';
   selector: 'app-book',
   templateUrl: './book.component.html',
   styles: [
-  ]
+    `
+    .ngx-pagination {
+      // border:1px solid #dadada;
+      margin:5px auto;
+      width: auto !important;
+      font-size: 1rem !important
+    }
+    .ngx-pagination li {
+      color:#0085A1;
+    }
+    .ngx-pagination a, .ngx-pagination button {
+      color:#0085A1 !important;
+      display: block;
+      padding: 0.1875rem 0.625rem;
+      border-radius: 2px !important;
+      border: 1px solid #dadada !important ;
+    }
+    .pagination-next.disabled {
+      border: 1px solid #dadada !important ;
+    }
+     
+    .pagination-previous.disabled {
+      border: 1px solid #dadada !important ;
+    }
+  `
+    ]
 })
 export class BookComponent implements OnInit {
 
   books: Book[];
   err: any;
   active: Book;
+  p = 1 ; 
 
   constructor(private http: HttpClient, private bookService: BookService) { }
 

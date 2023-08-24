@@ -12,6 +12,8 @@ import { FormsModule } from '@angular/forms';
 import { FormComponent } from './shared/form/form.component';
 import { BookDetailComponent } from './features/book-detail/book-detail.component';
 import { SpinnerComponent } from './features/spinner/spinner.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { TruncatePipe } from './pipe/truncate.pipe';
 
 @NgModule({
   declarations: [
@@ -21,14 +23,16 @@ import { SpinnerComponent } from './features/spinner/spinner.component';
     FooterComponent,
     FormComponent,
     BookDetailComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    TruncatePipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

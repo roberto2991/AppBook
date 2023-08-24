@@ -6,7 +6,7 @@
             <app-spinner *ngIf="!books"></app-spinner>
             <div class="row">
                 <ul class="list-group">
-                    <li class="list-group-item" [ngClass]="{active: book.id === active?.id}" *ngFor="let book of books"
+                    <li class="list-group-item" [ngClass]="{active: book.id === active?.id}" *ngFor="let book of books | paginate: {itemsPerPage: 2, currentPage: p}"
                         (click)="setActive(book)">
                         <img [src]="book.img ? book.img : '../../assets/img/kisspng.jpg'" class="img-thumnail mr-2" width="40">
                         {{book.id}} - {{book.title}} - {{book.author}}
@@ -18,6 +18,7 @@
                         
                     </li>
                 </ul>
+                <pagination-controls (pageChange)="p=$event"></pagination-controls>
             </div>
         </div>
         <div class="col">
