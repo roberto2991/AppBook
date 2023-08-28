@@ -30,7 +30,7 @@ import { Location } from '@angular/common';
             Isbn:  {{book.isbn}}
           </small>
           <p class="post-title bellottaFont">
-            {{book.description}}
+            {{book.description | truncate: 700}}
           </p>
           <button type="button" class="btn btn-outline-warning btn-sm" (click)="goBack()">Go back</button>
         </div>

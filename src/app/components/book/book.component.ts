@@ -20,6 +20,7 @@ import { FormsModule, NgForm, NgModel } from '@angular/forms';
     .ngx-pagination li {
       color:#0085A1;
     }
+    
     .ngx-pagination a, .ngx-pagination button {
       color:#0085A1 !important;
       display: block;
@@ -34,6 +35,13 @@ import { FormsModule, NgForm, NgModel } from '@angular/forms';
     .pagination-previous.disabled {
       border: 1px solid #dadada !important ;
     }
+
+    .search-book {
+      max-width: 500px;
+      padding-bottom: 10px;
+      margin: auto;
+      color: #405065;
+    }
   `
     ]
 })
@@ -43,6 +51,7 @@ export class BookComponent implements OnInit {
   err: any;
   active: Book;
   p = 1 ; 
+  term;
 
   constructor(private http: HttpClient, private bookService: BookService) { }
 

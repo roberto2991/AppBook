@@ -1,13 +1,22 @@
 <!-- Main Content -->
 <div class="container">
-    <div class="row align-items-start">
-        <div class="col">
+    <div class="row align-items-start">       
+        <div class="col">           
             <div *ngIf="err" class="alert alert-danger">{{err.statusText}}</div>
             <app-spinner *ngIf="!books"></app-spinner>
+            <div class="search-book">
+                <input type="text" 
+                class="form-control" 
+                name="search" 
+                [(ngModel)]="term" 
+                autocomplete="off" placeholder="Cerca tramite titolo...">
+            </div>          
             <div class="row">
                 <ul class="list-group">
-                    <li class="list-group-item" [ngClass]="{active: book.id === active?.id}" *ngFor="let book of books | paginate: {itemsPerPage: 2, currentPage: p}"
-                        (click)="setActive(book)">
+                    <li class="list-group-item" 
+                    [ngClass]="{active: book.id === active?.id}" 
+                    *ngFor="let book of books | paginate: {itemsPerPage: 2, currentPage: p} | filter:term"
+                    (click)="setActive(book)">
                         <img [src]="book.img ? book.img : '../../assets/img/kisspng.jpg'" class="img-thumnail mr-2" width="40">
                         {{book.id}} - {{book.title}} - {{book.author}}
                         <div class="pull-right">

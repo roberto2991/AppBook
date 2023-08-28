@@ -14,6 +14,7 @@ import { BookDetailComponent } from './features/book-detail/book-detail.componen
 import { SpinnerComponent } from './features/spinner/spinner.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { TruncatePipe } from './pipe/truncate.pipe';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { TruncatePipe } from './pipe/truncate.pipe';
     NgbModule,
     HttpClientModule,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    Ng2SearchPipeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
