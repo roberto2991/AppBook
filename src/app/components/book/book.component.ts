@@ -55,8 +55,6 @@ export class BookComponent implements OnInit {
 
   constructor(private http: HttpClient, private bookService: BookService) { }
 
-  
-
   getAll() {
     this.bookService.getAll().subscribe(data => {
       console.log(data)
@@ -75,9 +73,9 @@ export class BookComponent implements OnInit {
     },
       (error) => this.err = error
     );
+
+    location.reload();
   }
-
-
 
   setActive(book: Book) {
     this.active = book;

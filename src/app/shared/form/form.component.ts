@@ -67,6 +67,7 @@ export class FormComponent implements OnInit {
     } else {
       this.AddBook(f);
     }
+    location.reload();
   }
 
   edit(f: NgForm) {
