@@ -19,7 +19,7 @@
                     (click)="setActive(book)">
                         <img [src]="book.img ? book.img : '../../assets/img/kisspng.jpg'" class="img-thumnail mr-2" width="40">
                         {{book.id}} - {{book.title}} - {{book.author}}
-                        <div class="pull-right">
+                        <div [ngClass]="book.price > 20 ? 'pull-right red' : 'pull-right'">
                             € {{book.price | number:'1.2-2'}} 
                             <i class="fa fa-info-circle ml-2" [routerLink]="['/book', book.id]" aria-hidden="true"></i>
                             <i class="fa fa-trash ml-2" (click)="delete($event, book)" aria-hidden="true"></i>

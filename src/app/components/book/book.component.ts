@@ -20,7 +20,11 @@ import { FormsModule, NgForm, NgModel } from '@angular/forms';
     .ngx-pagination li {
       color:#0085A1;
     }
-    
+
+    .pull-right.red {
+      color:red;
+    }
+
     .ngx-pagination a, .ngx-pagination button {
       color:#0085A1 !important;
       display: block;
@@ -74,7 +78,6 @@ export class BookComponent implements OnInit {
       (error) => this.err = error
     );
 
-    location.reload();
   }
 
   setActive(book: Book) {

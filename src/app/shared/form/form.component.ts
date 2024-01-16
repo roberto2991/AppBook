@@ -4,8 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { BookService } from 'src/app/service/book.service';
 import { Book } from 'src/app/model/book';
 
-const dbUrl = "http://localhost:3000/books";
-
 @Component({
   selector: 'app-form',
   template: `
@@ -67,7 +65,6 @@ export class FormComponent implements OnInit {
     } else {
       this.AddBook(f);
     }
-    location.reload();
   }
 
   edit(f: NgForm) {
