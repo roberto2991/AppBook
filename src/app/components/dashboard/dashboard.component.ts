@@ -1,4 +1,4 @@
-import { Book } from './../../model/book';
+import { Book } from '../../model/book';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { BookService } from 'src/app/service/book.service';
@@ -8,7 +8,7 @@ import { FormsModule, NgForm, NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-book',
-  templateUrl: './book.component.html',
+  templateUrl: './dashboard.component.html',
   styles: [
     `
     .ngx-pagination {
@@ -49,7 +49,7 @@ import { FormsModule, NgForm, NgModel } from '@angular/forms';
   `
     ]
 })
-export class BookComponent implements OnInit {
+export class DashboardComponent implements OnInit {
 
   books: Book[];
   err: any;

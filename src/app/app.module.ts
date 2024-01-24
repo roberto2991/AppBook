@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { BookComponent } from './components/book/book.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import {HttpClientModule} from '@angular/common/http';
@@ -15,17 +15,19 @@ import { SpinnerComponent } from './features/spinner/spinner.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { TruncatePipe } from './pipe/truncate.pipe';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BookComponent,
+    DashboardComponent,
     HeaderComponent,
     FooterComponent,
     FormComponent,
     BookDetailComponent,
     SpinnerComponent,
-    TruncatePipe
+    TruncatePipe,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
