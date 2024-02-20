@@ -7,7 +7,7 @@ import { FormsModule, NgForm, NgModel } from '@angular/forms';
 
 
 @Component({
-  selector: 'app-book',
+  selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styles: [
     `

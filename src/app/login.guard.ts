@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AuthService } from './service/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,10 +9,9 @@ import { Observable } from 'rxjs';
 export class LoginGuard implements CanActivate {
 
 
-  loginOk: boolean = true
 
 
-  constructor(private router: Router)
+  constructor(private router: Router, private auth: AuthService)
   {
 
   }
@@ -19,14 +19,15 @@ export class LoginGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean  {
-    console.log(this.CheckLogin())
+    console.log("canActivate: " + this.CheckLogin())
     return this.CheckLogin()
   }
 
   private CheckLogin()
    {
     // chiamare il service e verifico le credenziali di accesso
-    if (!this.loginOk)
+    console.log("Expired: " + this.auth.Expired())
+    if (this.auth.Expired())
     {
       this.router.navigate(['/login'])
       return false

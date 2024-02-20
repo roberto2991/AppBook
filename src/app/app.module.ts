@@ -16,6 +16,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { TruncatePipe } from './pipe/truncate.pipe';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { HomeComponent } from './components/home/home.component';
     BookDetailComponent,
     SpinnerComponent,
     TruncatePipe,
-    HomeComponent
+    HomeComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
