@@ -14,6 +14,9 @@ const routes: Routes = [
     path: 'login', component: LoginComponent,
   },
   {
+    path: 'logout', redirectTo:'login', pathMatch:'full',
+  },
+  {
     path: 'dashboard', component: DashboardComponent, canActivate: [LoginGuard]
   },
   {
